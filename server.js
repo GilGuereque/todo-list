@@ -16,13 +16,13 @@ app.use(express.json())
 
 
 // Render page using GET function
-app.get('/', function(req, res){
+app.get('/', (req, res) => {
     res.render('index.ejs')
 });
 
 // POST request for updating Tasks list
-app.post('/addTodo', function(req, res){
-    res.render('index.ejs')
+app.post('/addTodo', (req, res) => {
+    res.redirect('/')
 });
 
 
