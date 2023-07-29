@@ -5,6 +5,15 @@ const PORT = 5050;
 
 require('dotenv').config()
 
+// Set up MongoDB configuration
+
+
+// Setting up configurations & middleware for Express
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
+
 
 // Render page using GET function
 app.get('/', function(req, res){

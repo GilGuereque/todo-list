@@ -1,11 +1,31 @@
 body {
     background-color: darkslategray;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Center content vertically at the top */
+    align-items: center;
+    min-height: 100vh; /* This ensures that the container occupies at least the full viewport height */
+    margin: 0; /* Remove any default margin to avoid spacing issues */
+    text-align: center;
 }
 
 h1, h2 {
     color: cadetblue;
+    text-align: center;
 }
 
-.todoItems {
+.todoItems, .item {
     color: antiquewhite;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
