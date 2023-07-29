@@ -1,12 +1,21 @@
 // Setting up express application and PORT variable
 const express = require('express');
+const { MongoClient } = require('mongodb');
 const app = express();
 const PORT = 5050;
 
 require('dotenv').config()
 
 // Set up MongoDB configuration
+let db,
+    dbConnectionStr = process.env.DB_STRING,
+    dbName = 'todo'
 
+MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
+    .then(client => {
+        console.log(`Connected to ${dbName} Database`)
+        db = client.db(dbName)
+    })
 
 // Setting up configurations & middleware for Express
 app.set('view engine', 'ejs')
@@ -17,11 +26,14 @@ app.use(express.json())
 
 // Render page using GET function
 app.get('/', (req, res) => {
-    res.render('index.ejs')
+    const todoItems = db.collection('todos').find().toArray();
+    const itemsLeft = db.collection('todos').countDocuments({completed: false});
+    res.render('index.ejs', {items: todoItems, left: itemsLeft});
 });
 
 // POST request for updating Tasks list
 app.post('/addTodo', (req, res) => {
+    
     res.redirect('/')
 });
 

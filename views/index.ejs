@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
-    <title>Todo List App</title>
+    <title>To Do List App</title>
 </head>
 <body>
     <h1> To Do List</h1>
     <h2> Tasks</h2>
     <ul class="todoItems">
+    <% for(let i=0; i < items.length; i++) {%>
         <li class="item">
-
+            <% if(items[i].completed === true) {%>
+                <span class="completed"><%= items[i].thing %></span>
+            <% }else{ %>
+                <span><%= items[i].thing %></span>
+            <% } %>
+            <span class="fa fa-trash"></span>
         </li>
+    <% } %>
     </ul>
     <form action="/addTodo" method="POST">
         <input type="text" placeholder="Add a Task" name="todoItem">
