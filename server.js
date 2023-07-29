@@ -20,6 +20,11 @@ app.get('/', function(req, res){
     res.render('index.ejs')
 });
 
+// POST request for updating Tasks list
+app.post('/addTodo', function(req, res){
+    res.render('index.ejs')
+});
+
 
 // Setting up app to run on localhost PORT 5050
 app.listen(process.env.PORT || PORT, () => {
