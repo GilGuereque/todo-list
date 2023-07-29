@@ -4,7 +4,8 @@
   "description": "My own todo list project from scratch",
   "main": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
