@@ -1,0 +1,24 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "My own todo list project from scratch",
+  "main": "server.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GilGuereque/todo-list.git"
+  },
+  "author": "Gil Guereque",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GilGuereque/todo-list/issues"
+  },
+  "homepage": "https://github.com/GilGuereque/todo-list#readme",
+  "dependencies": {
+    "mongo": "^0.1.0",
+    "mongodb": "^5.7.0",
+    "nodemon": "^3.0.1"
+  }
+}
