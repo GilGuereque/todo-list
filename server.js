@@ -25,11 +25,14 @@ app.use(express.json())
 
 
 // Render page using GET function
-app.get('/', (req, res) => {
+app.get('/', (req, res) => try {
     const todoItems = db.collection('todos').find().toArray();
     const itemsLeft = db.collection('todos').countDocuments({completed: false});
     res.render('index.ejs', {items: todoItems, left: itemsLeft});
-});
+} catch (error) {
+    console.error(error);
+}
+);
 
 // POST request for updating Tasks list
 app.post('/addTodo', (req, res) => {
