@@ -25,19 +25,26 @@ app.use(express.json())
 
 
 // Render page using GET function
-app.get('/', (req, res) => try {
-    const todoItems = db.collection('todos').find().toArray();
-    const itemsLeft = db.collection('todos').countDocuments({completed: false});
-    res.render('index.ejs', {items: todoItems, left: itemsLeft});
-} catch (error) {
-    console.error(error);
-}
-);
+app.get('/', (req, res) => {
+    try {
+        const todoItems = db.collection('todos').find().toArray();
+        const itemsLeft = db.collection('todos').countDocuments({completed: false});
+        res.render('index.ejs', {items: todoItems, left: itemsLeft});
+    } catch (error) {
+        console.error(error)
+        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the GET request');
+    }
+});
 
 // POST request for updating Tasks list
 app.post('/addTodo', (req, res) => {
+    try {   
+        res.redirect('/')
+    } catch (error) {
+        console.error(error)
+        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the GET request');
+    }
     
-    res.redirect('/')
 });
 
 
