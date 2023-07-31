@@ -52,6 +52,29 @@ app.post('/addTodo', (req, res) => {
 });
 
 
+// PUT request for updating tasks list to complete
+app.put('/markComplete'), (req,res) => {
+    try {
+        db.collection('todos').updateOne({thing: request.body.itemFromJS},{
+            $set: {
+                complete: true
+            }
+        },{
+            sort: {_id: -1},
+            upsert: false
+        })
+        .then(result => {
+            console.log('Task Marked Complete')
+            response.json('Task Marked Complete')
+        })
+    } catch (error) {
+        console.error(error)
+        express.response.status(500).send('500 HTTP status code. A server error has occured from the PUT request')
+    }
+};
+
+
+
 // Setting up app to run on localhost PORT 5050
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server running on port ${PORT}`)
