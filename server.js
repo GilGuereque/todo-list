@@ -56,3 +56,7 @@ app.post('/addTodo', (req, res) => {
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server running on port ${PORT}`)
 });
+
+
+// Export the Express API
+module.exports = app;
