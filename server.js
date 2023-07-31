@@ -69,10 +69,30 @@ app.put('/markComplete'), (req,res) => {
         })
     } catch (error) {
         console.error(error)
-        express.response.status(500).send('500 HTTP status code. A server error has occured from the PUT request')
+        express.response.status(500).send('500 HTTP status code. A server error has occured from the PUT request while marking complete')
     }
 };
 
+// PUT request for updating tasks to uncomplete
+app.put('/markUncomplete'), (req,res) => {
+    try {
+        db.collection('todos').updateOne({thing: request.body.itemFromJS}, {
+            $set: {
+                complete: false
+            }
+        },{
+            sort: {_id: -1},
+            upsert: false
+        })
+        .then(result => {
+            console.log('Task Marked Uncomplete')
+            response.json('Task Marked Uncomplete')
+        })
+    } catch (error) {
+        console.error(error)
+        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the PUT request while marking uncomplete.')
+    }
+};
 
 
 // Setting up app to run on localhost PORT 5050
