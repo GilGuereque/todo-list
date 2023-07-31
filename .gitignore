@@ -3,3 +3,4 @@ node_modules
 .vscode
 settings.json
 todo-apps.code-workspace
+"mongoose": "^7.4.1",
