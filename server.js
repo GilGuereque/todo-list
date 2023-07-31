@@ -36,13 +36,17 @@ app.get('/', (req, res) => {
     }
 });
 
-// POST request for updating Tasks list
+// POST request for inserting to Tasks list
 app.post('/addTodo', (req, res) => {
-    try {   
-        res.redirect('/')
+    try {
+        db.collection('todos').insertOne({thing: request.body.todoItem, completed: false})
+        .then(result => {
+            console.log('Todo Task Added')
+            res.redirect('/')
+        })
     } catch (error) {
         console.error(error)
-        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the GET request');
+        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the POST request');
     }
     
 });
