@@ -39,7 +39,7 @@ app.get('/', async (req, res) => {
 // POST request for inserting to Tasks list
 app.post('/addTodo', (req, res) => {
     try {
-        db.collection('todos').insertOne({thing: request.body.todoItem, completed: false})
+        db.collection('todos').insertOne({thing: req.body.todoItem, completed: false})
         .then(result => {
             console.log('Todo Task Added')
             res.redirect('/')
@@ -55,7 +55,7 @@ app.post('/addTodo', (req, res) => {
 // PUT request for updating tasks list to complete
 app.put('/markComplete'), (req,res) => {
     try {
-        db.collection('todos').updateOne({thing: request.body.itemFromJS},{
+        db.collection('todos').updateOne({thing: req.body.itemFromJS},{
             $set: {
                 complete: true
             }
@@ -65,7 +65,7 @@ app.put('/markComplete'), (req,res) => {
         })
         .then(result => {
             console.log('Task Marked Complete')
-            response.json('Task Marked Complete')
+            res.json('Task Marked Complete')
         })
     } catch (error) {
         console.error(error)
@@ -76,7 +76,7 @@ app.put('/markComplete'), (req,res) => {
 // PUT request for updating tasks to uncomplete
 app.put('/markUncomplete'), (req,res) => {
     try {
-        db.collection('todos').updateOne({thing: request.body.itemFromJS}, {
+        db.collection('todos').updateOne({thing: req.body.itemFromJS}, {
             $set: {
                 complete: false
             }
