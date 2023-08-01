@@ -32,7 +32,7 @@ app.get('/', async (req, res) => {
         res.render('index.ejs', {items: todoItems, left: itemsLeft});
     } catch (error) {
         console.error(error)
-        express.res.status(500).send('500 HTTP status code. A server error has ocurred from the GET request');
+        res.status(500).send('500 HTTP status code. A server error has ocurred from the GET request');
     }
 });
 
@@ -46,7 +46,7 @@ app.post('/addTodo', (req, res) => {
         })
     } catch (error) {
         console.error(error)
-        express.res.status(500).send('500 HTTP status code. A server error has ocurred from the POST request');
+        res.status(500).send('500 HTTP status code. A server error has ocurred from the POST request');
     }
     
 });
@@ -69,7 +69,7 @@ app.put('/markComplete'), (req,res) => {
         })
     } catch (error) {
         console.error(error)
-        express.res.status(500).send('500 HTTP status code. A server error has occured from the PUT request while marking complete')
+        res.status(500).send('500 HTTP status code. A server error has occured from the PUT request while marking complete')
     }
 };
 
@@ -90,7 +90,7 @@ app.put('/markUncomplete'), (req,res) => {
         })
     } catch (error) {
         console.error(error)
-        express.res.status(500).send('500 HTTP status code. A server error has ocurred from the PUT request while marking uncomplete.')
+        res.status(500).send('500 HTTP status code. A server error has ocurred from the PUT request while marking uncomplete.')
     }
 };
 
