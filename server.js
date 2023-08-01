@@ -1,6 +1,6 @@
 // Setting up express application and PORT variable
 const express = require('express');
-const { MongoClient } = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 const app = express();
 const PORT = 5050;
 
