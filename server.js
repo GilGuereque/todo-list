@@ -94,6 +94,25 @@ app.put('/markUncomplete'), (req,res) => {
     }
 };
 
+// refactored code including error handling and async/await
+app.delete('/deleteItem', async (request, response) => {
+    try {
+        await deleteItem(request.body.itemFromJS);
+        console.log('Todo Deleted');
+        response.json('Todo Deleted');
+    } catch (error) {
+        console.error(error);
+        response.status(500).send(error);
+    }
+});
+
+// async function to delete item and throw error message if needed
+async function deleteItem(item) {
+    const deletionResult = await db.collection('todos').deleteOne({thing: item});
+    if (deletionResult.deletedCount === 0) {
+        throw new Error('No todo with this item found to delete');
+    }
+};
 
 // Setting up app to run on localhost PORT 5050
 app.listen(process.env.PORT || PORT, () => {
