@@ -2,10 +2,10 @@
   "name": "todo-list",
   "version": "1.0.0",
   "description": "My own todo list project from scratch",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "test",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
