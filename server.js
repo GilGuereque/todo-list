@@ -25,14 +25,14 @@ app.use(express.json())
 
 
 // Render page using GET function
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     try {
         const todoItems = db.collection('todos').find().toArray();
         const itemsLeft = db.collection('todos').countDocuments({completed: false});
         res.render('index.ejs', {items: todoItems, left: itemsLeft});
     } catch (error) {
         console.error(error)
-        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the GET request');
+        express.res.status(500).send('500 HTTP status code. A server error has ocurred from the GET request');
     }
 });
 
@@ -46,7 +46,7 @@ app.post('/addTodo', (req, res) => {
         })
     } catch (error) {
         console.error(error)
-        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the POST request');
+        express.res.status(500).send('500 HTTP status code. A server error has ocurred from the POST request');
     }
     
 });
@@ -69,7 +69,7 @@ app.put('/markComplete'), (req,res) => {
         })
     } catch (error) {
         console.error(error)
-        express.response.status(500).send('500 HTTP status code. A server error has occured from the PUT request while marking complete')
+        express.res.status(500).send('500 HTTP status code. A server error has occured from the PUT request while marking complete')
     }
 };
 
@@ -86,11 +86,11 @@ app.put('/markUncomplete'), (req,res) => {
         })
         .then(result => {
             console.log('Task Marked Uncomplete')
-            response.json('Task Marked Uncomplete')
+            res.json('Task Marked Uncomplete')
         })
     } catch (error) {
         console.error(error)
-        express.response.status(500).send('500 HTTP status code. A server error has ocurred from the PUT request while marking uncomplete.')
+        express.res.status(500).send('500 HTTP status code. A server error has ocurred from the PUT request while marking uncomplete.')
     }
 };
 
