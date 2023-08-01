@@ -27,8 +27,8 @@ app.use(express.json())
 // Render page using GET function
 app.get('/', async (req, res) => {
     try {
-        const todoItems = db.collection('todos').find().toArray();
-        const itemsLeft = db.collection('todos').countDocuments({completed: false});
+        const todoItems = await db.collection('todos').find().toArray();
+        const itemsLeft = await db.collection('todos').countDocuments({completed: false});
         res.render('index.ejs', {items: todoItems, left: itemsLeft});
     } catch (error) {
         console.error(error)
