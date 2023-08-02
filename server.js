@@ -13,12 +13,27 @@ let db,
 
 MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
     .then(client => {
-        console.log(`Connected to ${dbName} Database`)
-        db = client.db(dbName)
+        console.log(`Connected to ${dbName} Database`);
+        db = client.db(dbName);
+
+        // Start the server only after the MongoDB connection is established
+        app.listen(process.env.PORT || PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
     })
     .catch(error => {
         console.error('Error connecting to the database:', error);
+        // Gracefully handle the error, such as terminating the application or showing an error page.
     });
+
+// Middleware to ensure the MongoDB connection has been established before proceeding with routes
+app.use((req, res, next) => {
+    if (!db) {
+        // If the MongoDB connection has not been established yet, return a temporary error message.
+        return res.status(500).send('500 HTTP status code. The server is still connecting to the database.');
+    }
+    next();
+});
 
 // Setting up configurations & middleware for Express
 app.set('view engine', 'ejs')
@@ -117,11 +132,15 @@ async function deleteItem(item) {
     }
 };
 
-// Setting up app to run on localhost PORT 5050
-app.listen(process.env.PORT || PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-});
-
-
-// Export the Express API
-//// module.exports = app;
+// Async function to start the server
+async function startServer(db) {
+    try {
+        app.locals.db = db;
+        app.listen(process.env.PORT || PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error('Error starting the server:', error);
+        // Gracefully handle the error, such as terminating the application or showing an error page.
+    }
+}
