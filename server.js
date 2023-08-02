@@ -16,6 +16,9 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
         console.log(`Connected to ${dbName} Database`)
         db = client.db(dbName)
     })
+    .catch(error => {
+        console.error('Error connecting to the databaase:', error);
+    });
 
 // Setting up configurations & middleware for Express
 app.set('view engine', 'ejs')
