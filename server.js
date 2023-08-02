@@ -23,7 +23,7 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
     })
     .catch(error => {
         console.error('Error connecting to the database:', error);
-        // Gracefully handle the error, such as terminating the application or showing an error page.
+        // handle any DB connection errors, such as terminating the application or showing an error page.
     });
 
 // Middleware to ensure the MongoDB connection has been established before proceeding with routes
@@ -112,7 +112,7 @@ app.put('/markUncomplete', (req,res) => {
     }
 });
 
-// refactored code including error handling and async/await
+// refactored code including error handling and async/await for DELETE request
 app.delete('/deleteItem', async (request, response) => {
     try {
         await deleteItem(request.body.itemFromJS);
@@ -143,4 +143,4 @@ async function startServer(db) {
         console.error('Error starting the server:', error);
         // Gracefully handle the error, such as terminating the application or showing an error page.
     }
-}
+};
