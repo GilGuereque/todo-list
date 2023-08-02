@@ -58,10 +58,10 @@ async function markComplete(){
 };
 
 // async function to mark uncomplete
-async function markUnComplete(){
+async function markUncomplete(){
     const itemText = this.parentNode.childNodes[1].innerText
     try{
-        const response = await fetch('markUnComplete', {
+        const response = await fetch('markUncomplete', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
