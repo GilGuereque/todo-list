@@ -53,7 +53,7 @@ app.post('/addTodo', (req, res) => {
 
 
 // PUT request for updating tasks list to complete
-app.put('/markComplete'), (req,res) => {
+app.put('/markComplete', (req,res) => {
     try {
         db.collection('todos').updateOne({thing: req.body.itemFromJS},{
             $set: {
@@ -71,10 +71,10 @@ app.put('/markComplete'), (req,res) => {
         console.error(error)
         res.status(500).send('500 HTTP status code. A server error has occured from the PUT request while marking complete')
     }
-};
+});
 
 // PUT request for updating tasks to uncomplete
-app.put('/markUncomplete'), (req,res) => {
+app.put('/markUncomplete', (req,res) => {
     try {
         db.collection('todos').updateOne({thing: req.body.itemFromJS}, {
             $set: {
@@ -92,7 +92,7 @@ app.put('/markUncomplete'), (req,res) => {
         console.error(error)
         res.status(500).send('500 HTTP status code. A server error has ocurred from the PUT request while marking uncomplete.')
     }
-};
+});
 
 // refactored code including error handling and async/await
 app.delete('/deleteItem', async (request, response) => {
