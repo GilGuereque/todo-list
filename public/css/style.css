@@ -29,3 +29,7 @@ form {
     justify-content: center;
     align-items: center;
 }
+
+.completed-task {
+    text-decoration: line-through;
+  }

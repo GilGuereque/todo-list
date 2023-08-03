@@ -13,7 +13,7 @@
     <h2> Tasks</h2>
     <ul class="todoItems">
     <% for(let i=0; i < items.length; i++) {%>
-        <li class="item">
+        <li class="item <% if (items[i].completed) { %>completed-task<% } %>">
             <% if(items[i].completed === true) {%>
                 <span class="completed"><%= items[i].thing %></span>
             <% }else{ %>
