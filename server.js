@@ -46,7 +46,7 @@ app.use(express.json())
 app.get('/', async (req, res) => {
     try {
         const todoItems = await db.collection('todos').find().toArray();
-        const itemsLeft = await db.collection('todos').countDocuments({completed: false});
+        const itemsLeft = await db.collection('todos').countDocuments({complete: false});
         res.render('index.ejs', {items: todoItems, left: itemsLeft});
     } catch (error) {
         console.error(error)
@@ -57,7 +57,7 @@ app.get('/', async (req, res) => {
 // POST request for inserting to Tasks list
 app.post('/addTodo', (req, res) => {
     try {
-        db.collection('todos').insertOne({thing: req.body.todoItem, completed: false})
+        db.collection('todos').insertOne({thing: req.body.todoItem, complete: false})
         .then(result => {
             console.log('Todo Task Added')
             res.redirect('/')
