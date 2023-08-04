@@ -141,6 +141,6 @@ async function startServer(db) {
         });
     } catch (error) {
         console.error('Error starting the server:', error);
-        // Gracefully handle the error, such as terminating the application or showing an error page.
+        // handle the error, such as terminating the application or showing an error page.
     }
 };
